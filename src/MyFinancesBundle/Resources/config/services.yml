@@ -1,0 +1,6 @@
+services:
+    my_finances.serializer:
+        class: MyFinancesBundle\Serializer\Serializer
+        arguments:
+            - ['Symfony\Component\Serializer\Normalizer\ObjectNormalizer']
+            - ['Symfony\Component\Serializer\Encoder\JsonEncoder']

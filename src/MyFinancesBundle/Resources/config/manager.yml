@@ -1,0 +1,12 @@
+services:
+    my_finances.income.manager:
+        class: MyFinancesBundle\Manager\CrudManager
+        arguments:
+            - @doctrine.orm.entity_manager
+            - MyFinancesBundle\Entity\Income
+
+    my_finances.expense.manager:
+        class: MyFinancesBundle\Manager\CrudManager
+        arguments:
+            - @doctrine.orm.entity_manager
+            - MyFinancesBundle\Entity\Expense
