@@ -3,6 +3,7 @@
 namespace MyFinancesBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 trait FlowAware
 {
@@ -18,12 +19,17 @@ trait FlowAware
     /**
      * @var \DateTime
      *
+     * @Assert\NotBlank()
+     * @Assert\Date()
+     *
      * @ORM\Column(name="date", type="date")
      */
     private $date;
 
     /**
      * @var string
+     *
+     * @Assert\NotBlank()
      *
      * @ORM\Column(name="concept", type="string", length=255)
      */
@@ -32,12 +38,18 @@ trait FlowAware
     /**
      * @var int
      *
+     * @Assert\NotBlank()
+     * @Assert\Type("integer")
+     *
      * @ORM\Column(name="unity", type="integer", options={"default": 1})
      */
     private $unity;
 
     /**
      * @var float
+     *
+     * @Assert\NotBlank()
+     * @Assert\Type("float")
      *
      * @ORM\Column(name="price", type="float")
      */
@@ -60,9 +72,9 @@ trait FlowAware
      * @param \DateTime $date
      * @return $this
      */
-    public function setDate(\DateTime $date)
+    public function setDate($date)
     {
-        $this->date = $date;
+        $this->date = new \DateTime($date);
 
         return $this;
     }
@@ -74,7 +86,11 @@ trait FlowAware
      */
     public function getDate()
     {
-        return $this->date->format('Y-m-d');
+        if ($this->date instanceof \DateTime) {
+            return $this->date->format('Y-m-d');
+        }
+
+        return $this->date;
     }
 
     /**
