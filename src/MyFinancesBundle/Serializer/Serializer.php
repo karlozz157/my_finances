@@ -43,7 +43,7 @@ class Serializer
                 $toArray[] = $this->jsonDecode($result);
             }
         } else {
-            $toArray = $this->jsonDecode($result);
+            $toArray = $this->jsonDecode($results);
         }
 
         return $toArray;
@@ -56,7 +56,7 @@ class Serializer
      */
     private function jsonDecode($result)
     {
-        return json_decode($this->getSerializer()->serialize($result, self::JSON));
+        return json_decode($this->getSerializer()->serialize($result, self::JSON), true);
     }
 
     /**
